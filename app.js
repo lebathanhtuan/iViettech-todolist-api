@@ -22,6 +22,7 @@ app.post('/tasks', (req, res) => {
     description: data.description,
   }
   taskList.unshift(newTask)
+  res.json(newTask)
 })
 
 app.put('/tasks/:id', (req, res) => {
@@ -39,12 +40,14 @@ app.put('/tasks/:id', (req, res) => {
     }
     return task
   })
+  res.json(updatedTask)
 })
 
 app.delete('/tasks/:id', (req, res) => {
   // Xóa dữ liệu trong taskList
   const id = req.params.id
   taskList = taskList.filter((task) => task.id !== id)
+  res.json({ id: id })
 })
 
 app.listen(4000, () => {
