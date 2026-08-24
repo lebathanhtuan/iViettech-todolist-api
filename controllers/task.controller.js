@@ -1,14 +1,14 @@
 import pool from '../config/db.js';
 import models from '../models/index.js'
 
-const { tasks, types } = models;
+const { Task, Type } = models;
 
 export async function getAllTasks(req, res) {
   try {
-    const result = await tasks.findAll({
+    const result = await Task.findAll({
       include: [
         {
-          model: types,
+          model: Type,
           as: 'type',
           attributes: ['id', 'name'],
         },
@@ -26,7 +26,7 @@ export async function createTask(req, res) {
   try {
     const { name, description } = req.body;
 
-    const result = await tasks.create({
+    const result = await Task.create({
       name,
       description,
     });
@@ -42,7 +42,7 @@ export async function updateTask(req, res) {
   try {
     const { id } = req.params;
 
-    const result = await tasks.update(req.body,
+    const result = await Task.update(req.body,
       { 
         where: { id: id }
       }
@@ -67,7 +67,7 @@ export async function deleteTask(req, res) {
   try {
     const { id } = req.params;
 
-    const result = await tasks.destroy({
+    const result = await Task.destroy({
       where: { id: id },
     });
 
