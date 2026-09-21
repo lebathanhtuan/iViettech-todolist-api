@@ -14,7 +14,7 @@ router.post('/login', (req, res) => {
       email: matchUser.email,
     })
   } else {
-    res.status(400).json({ message: 'Email hoặc mật khẩu không đúng' })
+    res.status(400).json({ message: 'Email hoặc mật khẩu không đúng.' })
   }
 })
 
@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
   const data = req.body
   const existUser = userList.find((item) => item.email === data.email)
   if (existUser) {
-    res.status(400).json({ message: 'Email đã tồn tại' })
+    res.status(400).json({ message: 'Email đã tồn tại.' })
   } else {
     const newUser = {
       id: new Date().getTime().toString(),
